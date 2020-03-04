@@ -18,7 +18,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
 
-  Widget getCounter() {
+  Widget getCounter(double factor) {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: StepperTouch(
@@ -41,12 +41,14 @@ class _MyAppState extends State<MyApp> {
               FittedBox(
                 child: Row(
                 children: <Widget>[
-                  getCounter(),
-                  getCounter(),
-                  getCounter(),
-                  getCounter(),
-                  getCounter(),
-                  getCounter()
+                  getCounter(100000),
+                  getCounter(10000),
+                  getCounter(1000),
+                  getCounter(100),
+                  getCounter(10),
+                  getCounter(1),
+                  Text(".",style: TextStyle(color: Colors.white, fontSize: 128),),
+                  getCounter(0.1)
                   ],
               ))
               // Padding(
