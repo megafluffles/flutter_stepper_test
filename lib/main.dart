@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:stepper_touch/stepper_touch.dart';
+import 'package:stepper_touch_test_jb/stepper.dart';
 import 'package:vector_math/vector_math_64.dart';
 
 void main() => runApp(
