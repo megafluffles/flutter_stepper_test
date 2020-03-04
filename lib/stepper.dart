@@ -39,6 +39,14 @@ class _Stepper2State extends State<StepperTouch>
   double _startAnimationPosX;
   double _startAnimationPosY;
 
+  double _fontSize = 56.0;
+
+  double _borderRadius = 60.0;
+
+  double _plusSize = 40.0;
+
+  double _minusSize = 40.0;
+
   @override
   void initState() {
     super.initState();
@@ -84,7 +92,7 @@ class _Stepper2State extends State<StepperTouch>
         child: Material(
           type: MaterialType.canvas,
           clipBehavior: Clip.antiAlias,
-          borderRadius: BorderRadius.circular(60.0),
+          borderRadius: BorderRadius.circular(_borderRadius),
           color: Colors.white.withOpacity(0.2),
           child: Stack(
             alignment: Alignment.center,
@@ -92,12 +100,12 @@ class _Stepper2State extends State<StepperTouch>
               Positioned(
                 left: widget.direction == Axis.horizontal ? 10.0 : null,
                 bottom: widget.direction == Axis.horizontal ? null : 10.0,
-                child: Icon(Icons.remove, size: 40.0, color: Colors.white),
+                child: Icon(Icons.remove, size: _plusSize, color: Colors.white),
               ),
               Positioned(
                 right: widget.direction == Axis.horizontal ? 10.0 : null,
                 top: widget.direction == Axis.horizontal ? null : 10.0,
-                child: Icon(Icons.add, size: 40.0, color: Colors.white),
+                child: Icon(Icons.add, size: _minusSize, color: Colors.white),
               ),
               GestureDetector(
                 onHorizontalDragStart: _onPanStart,
@@ -121,7 +129,7 @@ class _Stepper2State extends State<StepperTouch>
                           '$_value',
                           key: ValueKey<int>(_value),
                           style: TextStyle(
-                              color: Color(0xFF6D72FF), fontSize: 56.0),
+                              color: Color(0xFF6D72FF), fontSize: _fontSize),
                         ),
                       ),
                     ),

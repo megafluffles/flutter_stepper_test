@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:stepper_touch_test_jb/stepper.dart';
-import 'package:vector_math/vector_math_64.dart';
 
 void main() => runApp(
       MaterialApp(
@@ -23,7 +22,7 @@ class _MyAppState extends State<MyApp> {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: StepperTouch(
-            initialValue: 5,
+            initialValue: 0,
             direction: Axis.vertical,
             withSpring: false,
             onChanged: (int value) => print('new value $value'),
@@ -39,10 +38,12 @@ class _MyAppState extends State<MyApp> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Transform(
-                transform: Matrix4.diagonal3(Vector3(0.5, 0.5, 0.5)),
+              FittedBox(
                 child: Row(
                 children: <Widget>[
+                  getCounter(),
+                  getCounter(),
+                  getCounter(),
                   getCounter(),
                   getCounter(),
                   getCounter()
