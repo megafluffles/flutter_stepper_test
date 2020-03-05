@@ -18,16 +18,37 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
 
-  Widget getCounter(double factor) {
+  double _initialValue = 123456.7;
+
+  Widget getCounter(int decimalPlace, double value) {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: StepperTouch(
-            initialValue: 0,
+            initialValue: getFactor(decimalPlace, value),
             direction: Axis.vertical,
             withSpring: false,
             onChanged: (int value) => print('new value $value'),
           ),
     );
+  }
+
+  int getFactor(int decimalPlaces, double value) {
+
+    var valueString = reverse(value.toStringAsFixed(1).replaceAll('.', ''));
+
+    var digitString = valueString.substring(decimalPlaces + 1, decimalPlaces + 2);
+
+    var digit = int.parse(digitString);
+
+    return digit;
+  }
+
+  String reverse(String input) {
+
+    print(input);
+
+    return input.split('').reversed.join();
+
   }
 
   @override
@@ -41,25 +62,16 @@ class _MyAppState extends State<MyApp> {
               FittedBox(
                 child: Row(
                 children: <Widget>[
-                  getCounter(100000),
-                  getCounter(10000),
-                  getCounter(1000),
-                  getCounter(100),
-                  getCounter(10),
-                  getCounter(1),
+                  getCounter(5, _initialValue),
+                  getCounter(4, _initialValue),
+                  getCounter(3, _initialValue),
+                  getCounter(2, _initialValue),
+                  getCounter(1, _initialValue),
+                  getCounter(0, _initialValue),
                   Text(".",style: TextStyle(color: Colors.white, fontSize: 128),),
-                  getCounter(0.1)
+                  getCounter(-1, _initialValue),
                   ],
               ))
-              // Padding(
-              //   padding: const EdgeInsets.all(16.0),
-              //   child: Transform(
-              //     transform: Matrix4.diagonal3(Vector3(0.5, 0.5, 0.5)),
-              //     child: StepperTouch(
-              //     initialValue: 5,
-              //     onChanged: (int value) => print('new value $value'),
-              //   )),
-              // ),
             ],
           ),
         ),
