@@ -16,10 +16,16 @@ class MyApp extends StatefulWidget {
   _MyAppState createState() => _MyAppState();
 }
 
-class _MyAppState extends State<MyApp> with ChangeNotifier {
+class _MyAppState extends State<MyApp> {
 
   final double _initialValue = 123456.7;
-  double _currentValue; fasdfasdfas; // is anything actually reading this????
+  double _currentValue;
+
+  _MyAppState() {
+
+    _currentValue = _initialValue;
+  
+  }
 
   void updateValue(int decimalPlace, int value) {
 
@@ -38,7 +44,6 @@ class _MyAppState extends State<MyApp> with ChangeNotifier {
 
     setState(() {
       _currentValue = double.parse(newString);
-      notifyListeners();
     });
 
   }
@@ -80,8 +85,6 @@ class _MyAppState extends State<MyApp> with ChangeNotifier {
   @override
   Widget build(BuildContext context) {
 
-    _currentValue = _initialValue;
-    
     return Scaffold(
       body: SafeArea(
         child: Center(
@@ -91,14 +94,14 @@ class _MyAppState extends State<MyApp> with ChangeNotifier {
               FittedBox(
                 child: Row(
                 children: <Widget>[
-                  getCounter(5, _initialValue),
-                  getCounter(4, _initialValue),
-                  getCounter(3, _initialValue),
-                  getCounter(2, _initialValue),
-                  getCounter(1, _initialValue),
-                  getCounter(0, _initialValue),
+                  getCounter(5, _currentValue),
+                  getCounter(4, _currentValue),
+                  getCounter(3, _currentValue),
+                  getCounter(2, _currentValue),
+                  getCounter(1, _currentValue),
+                  getCounter(0, _currentValue),
                   Text(".",style: TextStyle(color: Colors.white, fontSize: 128),),
-                  getCounter(-1, _initialValue),
+                  getCounter(-1, _currentValue),
                   ],
               )),
               Text(_currentValue.toString(), style: TextStyle(color: Colors.white, fontSize: 64),)
