@@ -35,7 +35,7 @@ class _Stepper2State extends State<StepperTouch>
     with SingleTickerProviderStateMixin {
   AnimationController _controller;
   Animation _animation;
-  int _value;
+  int _internalValue;
   double _startAnimationPosX;
   double _startAnimationPosY;
 
@@ -47,6 +47,13 @@ class _Stepper2State extends State<StepperTouch>
 
   double _minusSize = 40.0;
 
+  int get _value => _internalValue;
+  set _value(int value) {
+    if (value < 0) value = 9;
+    else if (value > 9) value = 0;
+    
+    _internalValue = value;
+  }
   @override
   void initState() {
     super.initState();

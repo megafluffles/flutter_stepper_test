@@ -29,11 +29,11 @@ class _MyAppState extends State<MyApp> {
 
   void updateValue(int decimalPlace, int value) {
 
-    if (value < 0 || value > 9) {
+    // if (value < 0 || value > 9) {
       
-      throw UnimplementedError();
+    //   throw UnimplementedError();
     
-    }
+    // }
 
     String valueString = reverse(_currentValue.toString().replaceAll(".", ""));
     String beforeString = valueString.substring(0, decimalPlace + 1);
@@ -86,11 +86,13 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
 
     return Scaffold(
+      backgroundColor: Colors.lightBlue,
       body: SafeArea(
         child: Center(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
+              Text(_currentValue.toString(), style: TextStyle(fontSize: 64),),
               FittedBox(
                 child: Row(
                 children: <Widget>[
@@ -100,11 +102,14 @@ class _MyAppState extends State<MyApp> {
                   getCounter(2, _currentValue),
                   getCounter(1, _currentValue),
                   getCounter(0, _currentValue),
-                  Text(".",style: TextStyle(color: Colors.white, fontSize: 128),),
+                  Text(".",style: TextStyle(fontSize: 128),),
                   getCounter(-1, _currentValue),
                   ],
               )),
-              Text(_currentValue.toString(), style: TextStyle(color: Colors.white, fontSize: 64),)
+              Padding(
+                padding: EdgeInsets.fromLTRB(0, 8, 0, 8),
+                child: RaisedButton(child: Text("Set"), onPressed: null,)
+              )
             ],
           ),
         ),
