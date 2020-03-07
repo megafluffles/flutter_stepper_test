@@ -16,9 +16,32 @@ class MyApp extends StatefulWidget {
   _MyAppState createState() => _MyAppState();
 }
 
-class _MyAppState extends State<MyApp> {
+class _MyAppState extends State<MyApp> with ChangeNotifier {
 
-  double _initialValue = 123456.7;
+  final double _initialValue = 123456.7;
+  double _currentValue; fasdfasdfas; // is anything actually reading this????
+
+  void updateValue(int decimalPlace, int value) {
+
+    if (value < 0 || value > 9) {
+      
+      throw UnimplementedError();
+    
+    }
+
+    String valueString = reverse(_currentValue.toString().replaceAll(".", ""));
+    String beforeString = valueString.substring(0, decimalPlace + 1);
+    String afterString = valueString.substring(decimalPlace + 2);
+    String withoutDecimalPlace = reverse(beforeString + value.toString() + afterString);
+    String newString = withoutDecimalPlace.substring(0, withoutDecimalPlace.length - 1) + "." +
+      withoutDecimalPlace.substring(withoutDecimalPlace.length - 1);
+
+    setState(() {
+      _currentValue = double.parse(newString);
+      notifyListeners();
+    });
+
+  }
 
   Widget getCounter(int decimalPlace, double value) {
     return Padding(
@@ -27,7 +50,10 @@ class _MyAppState extends State<MyApp> {
             initialValue: getFactor(decimalPlace, value),
             direction: Axis.vertical,
             withSpring: false,
-            onChanged: (int value) => print('new value $value'),
+            onChanged: (int value) {
+              updateValue(decimalPlace, value);
+              print('new value $value');
+            },
           ),
     );
   }
@@ -53,6 +79,9 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+
+    _currentValue = _initialValue;
+    
     return Scaffold(
       body: SafeArea(
         child: Center(
@@ -71,7 +100,8 @@ class _MyAppState extends State<MyApp> {
                   Text(".",style: TextStyle(color: Colors.white, fontSize: 128),),
                   getCounter(-1, _initialValue),
                   ],
-              ))
+              )),
+              Text(_currentValue.toString(), style: TextStyle(color: Colors.white, fontSize: 64),)
             ],
           ),
         ),
