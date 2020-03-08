@@ -18,7 +18,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
 
-  final double _initialValue = 123456.7;
+  final double _initialValue = 0;
   double _currentValue;
 
   _MyAppState() {
@@ -65,6 +65,7 @@ class _MyAppState extends State<MyApp> {
 
   int getFactor(int decimalPlaces, double value) {
 
+    fasdfasdfads; // bug: "0" needs to be "000000.0" below for it not to crash
     var valueString = reverse(value.toStringAsFixed(1).replaceAll('.', ''));
 
     var digitString = valueString.substring(decimalPlaces + 1, decimalPlaces + 2);
